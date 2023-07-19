@@ -6,13 +6,13 @@ import { Register } from "./register"
 function App() {
   const [Form, setForm] = useState('login')
 
-  const tForm = () =>{
-    
+  const tForm = (name) =>{
+    setForm(name)
   }
   return (
     <div className="App">
       {
-        Form === 'login' ? <Login/> : <Register />
+        Form === 'login' ? <Login onSwitch = {tForm}/> : <Register onSwitch = {tForm}/>
       }
     </div>
   );
