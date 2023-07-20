@@ -16,6 +16,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .nav ul {
@@ -30,8 +31,9 @@ body {
   margin-left: 30px;
   margin-right: 30px;
   color: #fff;
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .site-title {
@@ -39,7 +41,12 @@ body {
   margin-right: 30px;
   color: #fff;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 32px;
   cursor: pointer;
   list-style: none;
+  text-decoration: none
+}
+
+.test{
+  text-decoration: none;
 }
