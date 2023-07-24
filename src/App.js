@@ -6,6 +6,7 @@ import Routines from './pages/Routines'
 import Products from './pages/Products'
 import Recommendations from './pages/Recommendations'
 import Account from './pages/Account'
+import Register from './pages/Register'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/recommendations' element={<Recommendations />} />
           <Route path='/account' element={<Account />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </div>
     </div>

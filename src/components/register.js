@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
+
 
 export const Register = (props) => {
     const [name, setName] = useState('')
@@ -21,7 +23,8 @@ export const Register = (props) => {
                 <button type = "submit">Register</button>
             </form>
             <br></br>
-            <button onClick = {() => props.onSwitch('login')}>Have an account? Login instead.</button>
+            <Link style={{ textDecoration: 'none', color:'white' }} to='/account'>Login instead</Link>
         </div>
     )
 }
+export default Register

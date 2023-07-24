@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Login } from "../components/login"
-import { Register } from "../components/register"
+import { Register } from "../components/Register"
 
 export default function Account() {
     const [Form, setForm] = useState('login')
