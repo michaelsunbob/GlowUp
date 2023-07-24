@@ -9,9 +9,9 @@ import Account from './pages/Account'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: '#F2E4DA'}}>
       <Navbar />
-      <div className='container'>
+      <div >
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/routines' element={<Routines />} />

@@ -31,24 +31,23 @@ const Quiz = () => {
      <div className = "container">
         {currQuestion === 1 && (
             <div>
-                <h3 className = "question">Question 1</h3>
-                <h4>What is your age?</h4>
+                <h2 className="question">What is your age?</h2>
                 <form onSubmit ={handleSubmit}>
                     <label>
-                    <input type="text" value={age} onChange={(e) => setAge(e.target.value)} />
+                    <input className="age" type="number" value={age} onChange={(e) => setAge(e.target.value)} />
                     </label>
                     <br/>
-                    <button onClick={handleStart}>Previous</button>
-                    <button onClick={handleNext}>Next</button>
+                    <button className = "prev "onClick={handleStart}></button>
+                    <button className = "next" onClick={handleNext}></button>
                 </form>
             </div>
           )}
 
         {currQuestion === 2 && (
             <div>
-                <h3 className = "question">Question 2</h3>
-                <h4>What is your skin type?</h4>
-                <form onSubmit ={handleSubmit}>
+                <h2 className = "question">What is your skin type?</h2>
+                <form onSubmit ={handleSubmit} >
+                    <div className = "options">
                     <label>
                         <input type="radio" name='skinType' value='oily' checked={skinType === 'oily'} onChange={() => setSkinType('oily')} />
                          Oily
@@ -65,18 +64,19 @@ const Quiz = () => {
                         <input type="radio" name="skinType" value="normal" checked={skinType === 'normal'} onChange={() => setSkinType('normal')} />
                         Normal
                     </label>
+                    </div>
                     <br/>
-                    <button onClick={handlePrev}>Previous</button>
-                    <button onClick={handleNext}>Next</button>
+                    <button className = "prev" onClick={handlePrev}></button>
+                    <button  className = "next" onClick={handleNext}></button>
                 </form>
             </div>
       )}  
 
         {currQuestion === 3 && (
-            <div>
-                <h3 className = "question">Question 3</h3>
-                <h4>Do you have any skin conditions? Select all that apply</h4>
+            <div className="checkbox-container">
+                <h2 className = "question">Do you have any skin conditions? Select all that apply</h2>
                 <form onSubmit ={handleSubmit}>
+                    <div className="checkbox-options">
                     <label>
                         <input type="checkbox" value="None" checked={skinConditions.includes('None')} 
                                onChange={() => setSkinConditions((prevConditions) =>prevConditions.includes('None') 
@@ -107,18 +107,18 @@ const Quiz = () => {
                                ? prevConditions.filter((condition) => condition !== 'Rosacea') : [...prevConditions, 'Rosacea'])} />
                                Rosacea
                     </label>
-                    <br/>
-                    <button onClick={handlePrev}>Prev</button>
-                    <button onClick={handleNext}>Next</button>
+                    </div>
+                    <button className = "prev" onClick={handlePrev}></button>
+                    <button className = "next" onClick={handleNext}></button>
                 </form>
             </div>
         )}
 
         {currQuestion === 4 && (
-            <div>
-                <h3 className = "question">Question 4</h3>
-                <h4>Do you have any skin concerns? Select all that apply. </h4>
+            <div className="checkbox-container">
+                <h2 className = "question">Do you have any skin concerns? Select all that apply. </h2>
                 <form onSubmit ={handleSubmit}>
+                    <div className ="checkbox-options">
                     <label>
                         <input type="checkbox" value="None" checked={skinConcerns.includes('None')} 
                                onChange={() => setSkinConcerns((prevConcerns) => prevConcerns.includes('None') 
@@ -155,10 +155,10 @@ const Quiz = () => {
                                ? prevConcerns.filter((concern) => concern !== 'Dullness') : [...prevConcerns, 'Dullness'])} />
                                Dullness
                     </label>
+                    </div>
+                    <button className = "prev" onClick={handlePrev}></button>
                     <br/>
-                    <button onClick={handlePrev}>Prev</button>
-                    <br/>
-                    <button type = "submit" >Submit </button>
+                    <button type = "submit"> Submit </button>
                 </form>
             </div>
         )}
