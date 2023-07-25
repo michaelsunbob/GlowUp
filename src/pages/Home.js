@@ -18,7 +18,6 @@ export default function Home() {
           {!startQuiz ?
             (<div className="container">
                 <div className = "title"> Lets start off with some questions</div>
-                
                 <button onClick={handleStartQuiz} className="start-but">Take Skin Quiz</button> 
             </div>)
             : 
