@@ -4,12 +4,12 @@ import "../styles/navbar.css"
 import "../styles/login.css"
 
 export const Login = () => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setError] = useState('')
     const [success, setSuccess] = useState(false);
 
-    const emailRef = useRef()
+    const usernameRef = useRef()
     const errRef = useRef()
 
 
@@ -19,12 +19,12 @@ export const Login = () => {
     }
 
     useEffect(() => {
-        emailRef.current.focus()
+        usernameRef.current.focus()
     }, [])
 
     useEffect(() => {
         setError('');
-    }, [email, password])
+    }, [username, password])
 
     return (
         <>
@@ -41,15 +41,15 @@ export const Login = () => {
                     <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>
-                        <label for="email">E-mail: </label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="glowingUser@chi.com" name="email" required ref ={emailRef}></input>
+                        <label for="text">E-mail: </label>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="glowingUser@chi.com" name="username" required ref ={usernameRef}></input>
                         <label for="password">Password: </label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" required></input>
                         <button type="submit">Login</button>
                     </form>
                     <br></br>
                     <li>
-                            <Link style={{ textDecoration: 'none', color:'white' }} to='/register'>Register</Link>
+                            <Link style={{ textDecoration: 'none', color:'black' }} to='/register'>Register</Link>
                     </li>
                 </section>
             )}
