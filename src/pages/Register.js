@@ -5,7 +5,7 @@ import Register  from "../components/Register"
 export default function Reg() {
     return (
     <div>
-            ( <Register/> )
+             <Register/> 
 
     </div>
 
