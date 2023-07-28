@@ -7,13 +7,13 @@
 }
 
 .container {
-   background-image: url("../assets/quizImage2.jpg");
+   background-image: url("../assets/image3.jpg");
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   height: 65vh;
-   width: 100vh;
+   height: 63vh;
+   width: 110vh;
    background-size: cover;
    background-repeat: no-repeat;
    background-position: center;
