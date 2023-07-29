@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
 import "../styles/navbar.css"
 import "../styles/register.css"
 
@@ -25,6 +26,16 @@ export const Register = (props) => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
+
+    const register = () => {
+        Axios.post('http://localhost3001/register', {
+            username: username,
+            password: password
+        }).then((response) =>{
+            console.log(response);
+        });
+    };
+    
 
     useEffect (() =>{
         //userRef.current.focus()
@@ -63,7 +74,7 @@ export const Register = (props) => {
                 </p>
                 <br></br>
                 <br></br>
-                <label for = "password"> Password: </label>
+                <label htmlFor = "password"> Password: </label>
                 <input type = 'password' id = 'password' value = {password} onChange = {(e) => setPassword(e.target.value)} aria-invalid={validPassword ? "false" : "true"} 
                    aria-describedby= "passwordError" onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} required></input>
                 <p id = "userError" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
@@ -72,7 +83,7 @@ export const Register = (props) => {
                 </p>
                 <br></br>
                 <br></br>
-                <label for = "password"> Verify Password: </label>
+                <label htmlFor = "password"> Verify Password: </label>
                 <input type = 'password' id = 'confirmPassword' value = {verifyPass} onChange = {(e) => setVerifyPass(e.target.value)} aria-invalid={validVerify ? "false" : "true"} 
                    aria-describedby= "passwordError" onFocus={() => setVerifyFocus(true)} onBlur={() => setVerifyFocus(false)} required></input>
                 <p id = "userError" className={verifyFocus && !validVerify ? "instructions" : "offscreen"}>
@@ -80,7 +91,7 @@ export const Register = (props) => {
                 </p>
                 <br></br>
                 <br></br>
-                <button disabled={!validUsername || !validPassword || !validVerify ? true : false}>Register</button>
+                <button onClick = {register}disabled={!validUsername || !validPassword || !validVerify ? true : false}>Register</button>
             </form>
             <br></br>
             <Link style={{ textDecoration: 'none', color:'black' }} to='/account'>Login instead</Link>
