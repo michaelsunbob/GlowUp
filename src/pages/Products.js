@@ -1,3 +1,6 @@
+import { AllProductList } from "../components/AllProductList"
+import "../styles/productlist.css"
+
 export default function Products() {
-    return <h1>Products</h1>
+    return <AllProductList />
 }

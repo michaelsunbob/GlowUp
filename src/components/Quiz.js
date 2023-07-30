@@ -187,6 +187,6 @@ const Quiz = () => {
         </form>
     </div> 
     )
-};
+}
 
 export default Quiz
