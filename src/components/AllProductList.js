@@ -3,8 +3,26 @@ import { ProductList } from "./ProductList"
 import { EditProductList } from "./EditProductList"
 import { ProductListForm } from "./ProductListForm"
 import { v4 as uuidv4 } from "uuid"
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 export const AllProductList = () => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyCZzStYNtHWmNmXMyOKYebl4cPv2TN8kJo",
+    authDomain: "react-550c0.firebaseapp.com",
+    projectId: "react-550c0",
+    storageBucket: "react-550c0.appspot.com",
+    messagingSenderId: "646908889125",
+    appId: "1:646908889125:web:a1af917b9a1883436917cc",
+    measurementId: "G-LPJ8WQFLE0"
+  }
+
+  initializeApp(firebaseConfig)
+
+  const db = getFirestore()
+
+  const colRef = collection(db, 'productlists')
+
   const [productlists, setProductlists] = useState([])
 
   const addProductList = (productlist) => {
