@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import Axios from 'axios'
+import {signInWithEmailAndPassword} from "firebase/auth"
 import "../styles/navbar.css"
 import "../styles/login.css"
+import { auth } from "../firebase";
 
 export const Login = () => {
     const [username, setUsername] = useState('')
@@ -13,23 +14,19 @@ export const Login = () => {
     const usernameRef = useRef()
     const errRef = useRef()
 
-    const login = () => {
-        Axios.post('http://localhost3001/login', {
-            username: username,
-            password: password
-        }).then((response) =>{
-            console.log(response);
-        });
-    };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSuccess(true);
+        signInWithEmailAndPassword(auth, username, password).then((userCredential) => {
+            console.log(userCredential)
+            setSuccess(true);
+        }).catch((error) => {
+            console.log(error);
+        })
     }
 
     useEffect(() => {
-        usernameRef.current.focus()
+        //usernameRef.current.focus()
     }, [])
 
     useEffect(() => {
@@ -43,7 +40,7 @@ export const Login = () => {
                     <h1>Login in Successful</h1>
                     <br />
                     <p>
-                        <a href="/">Take the Quiz!</a>
+                        <a href="/authuser">Go to account</a>
                     </p>
                 </section>
             ) : (
@@ -52,10 +49,10 @@ export const Login = () => {
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="text">E-mail: </label>
-                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="glowingUser@chi.com" name="username" required ref ={usernameRef}></input>
+                        <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="glowingUser@chi.com" name="username" required ref ={usernameRef}></input>
                         <label htmlFor="password">Password: </label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" required></input>
-                        <button onClick = {login}>Login</button>
+                        <button type = "submit" >Login</button>
                     </form>
                     <br></br>
                     <li>

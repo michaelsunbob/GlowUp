@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import Recommendations from './pages/Recommendations'
 import Account from './pages/Account'
 import Register from './pages/Register'
+import AuthUser from './pages/AuthUser'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/recommendations' element={<Recommendations />} />
           <Route path='/account' element={<Account />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/authuser' element={<AuthUser />} />
         </Routes>
       </div>
     </div>

@@ -10,6 +10,18 @@
   text-align: center;
 }
 
+.product-container {
+  display: flex;
+}
+
+.comp1 {
+  margin-right: 10rem;
+}
+
+.comp2 {
+  margin-left: 10rem;
+}
+
 h1 {
   color: #F2E4DA;
   margin-bottom: 0.5rem;
@@ -20,7 +32,7 @@ h1 {
   background: #6B2E32;
   margin-top: 6rem;
   padding: 2rem;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .productlistform {
@@ -54,7 +66,6 @@ h1 {
 .productlist {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   background: #F2E4DA;
   color: #6B2E32;
   padding: 0.75rem 1rem;
@@ -64,7 +75,6 @@ h1 {
 }
 
 .view {
-  color: #c5aeff;
+  color: #6B2E32;
   text-decoration: line-through;
 }
- 
