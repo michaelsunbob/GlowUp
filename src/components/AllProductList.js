@@ -21,8 +21,6 @@ export const AllProductList = () => {
 
   const db = getFirestore()
 
-  const colRef = collection(db, 'productlists')
-
   const [productlists, setProductlists] = useState([])
 
   const addProductList = (productlist) => {
