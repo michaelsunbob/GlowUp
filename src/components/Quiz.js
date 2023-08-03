@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import "../styles/quiz.css"
 
@@ -10,7 +10,11 @@ const Quiz = () => {
     const [skinConcerns, setSkinConcerns] = useState('')
     const [currQuestion, setCurrQuestion] = useState(1) 
     const [recommendedProducts, setRecommendedProducts] = useState('')
-    
+
+    useEffect(() => {
+        console.log('recommendedProducts:', recommendedProducts)
+      }, [recommendedProducts])
+
     const handleNext = () => {
         setCurrQuestion((onPrev) => onPrev + 1)
     }
@@ -20,34 +24,44 @@ const Quiz = () => {
     }
 
     const handleStart = () => {
-       /* */ 
     }
-    
+
     const handleSubmit = async (event) => {
-        
-        event.preventDefault();
-        const keywords = [skinType, ...skinConditions, ...skinConcerns].filter(Boolean).join(' ');
+        event.preventDefault()
+        let userPreferences = [...skinConditions, ...skinConcerns]
+
+        if (age > 25) {
+            userPreferences = [...userPreferences, "retinol", "anti-aging"]
+          }
     
         try {
-          const response = await axios.get("https://sephora.p.rapidapi.com/products/v2/list", {
-            params: {
-              country: "SG",
-              language: "en-SG",
-              q: keywords,
-              limit: 10,
-            },
-            headers: {
-              'X-RapidAPI-Key': '508d2a55bdmshf292a5a473cc839p1cf4d7jsn3b570d81946b',
-              'X-RapidAPI-Host': 'sephora.p.rapidapi.com',
-            },
-          });
+          const responses = await Promise.all(
+            userPreferences.map(async (concern) => {
+              const keywords = [skinType, concern].filter(Boolean).join(' ')
     
-          const products = response.data; 
-          console.log(products);
+              const response = await axios.get("https://sephora.p.rapidapi.com/products/v2/list", {
+                params: {
+                  country: "SG",
+                  language: "en-SG",
+                  query: keywords,
+                  category: "skincare", 
+                  limit: 10,
+                },
+                headers: {
+                  'X-RapidAPI-Key': '508d2a55bdmshf292a5a473cc839p1cf4d7jsn3b570d81946b',
+                  'X-RapidAPI-Host': 'sephora.p.rapidapi.com',
+                },
+              });
+    
+              return response.data
+            })
+          );
+          const allProducts = responses.reduce((acc, curr) => acc.concat(curr), [])
+          setRecommendedProducts(allProducts)
         } catch (error) {
-          console.error(error);
+          console.error(error)
         }
-      };
+      };    
 
 
     return (

@@ -28,7 +28,7 @@ export const Register = (props) => {
     const [success, setSuccess] = useState(false);
 
     const register = () => {
-        Axios.post('http://localhost3001/register', {
+        Axios.post('http://localhost:3001/register', {
             username: username,
             password: password
         }).then((response) =>{
