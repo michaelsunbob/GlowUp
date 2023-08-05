@@ -1,37 +1,52 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { ProductList } from "./ProductList"
 import { EditProductList } from "./EditProductList"
 import { ProductListForm } from "./ProductListForm"
 import { v4 as uuidv4 } from "uuid"
-import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { auth } from "../firebase"
+import { onAuthStateChanged } from 'firebase/auth'
+import {
+  getFirestore, collection, getDocs,
+  addDoc, deleteDoc, doc,
+  updateDoc,
+  onSnapshot
+} from "firebase/firestore"
 
 export const AllProductList = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyCZzStYNtHWmNmXMyOKYebl4cPv2TN8kJo",
-    authDomain: "react-550c0.firebaseapp.com",
-    projectId: "react-550c0",
-    storageBucket: "react-550c0.appspot.com",
-    messagingSenderId: "646908889125",
-    appId: "1:646908889125:web:a1af917b9a1883436917cc",
-    measurementId: "G-LPJ8WQFLE0"
-  }
-
-  initializeApp(firebaseConfig)
-
-  const db = getFirestore()
-
   const [productlists, setProductlists] = useState([])
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('User is signed in:', user.uid)
+    } else {
+      console.log('User is signed out')
+    }
+  })
+
+  const db = getFirestore()
+  const colRef = collection(db, 'productlists')
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+      let templist = []
+      snapshot.docs.forEach((doc) => {
+        templist.push({ ...doc.data(), id: doc.id })
+      })
+      setProductlists(templist)
+    })
+
+    return () => unsubscribe()
+  }, [])
+
   const addProductList = (productlist) => {
-    setProductlists([
-      ...productlists,
-      { id: uuidv4(), task: productlist, view: false, isEditing: false },
-    ])
+    addDoc(colRef, {
+      id: uuidv4(), task: productlist, view: false, isEditing: false
+    })
   }
 
   const deleteProductList = (id) => {
-    setProductlists(productlists.filter((productlist) => productlist.id !== id))
+    const docRef = doc(db, 'productlists', id)
+    deleteDoc(docRef)
   }
 
   const toggleView = (id) => {
@@ -43,20 +58,21 @@ export const AllProductList = () => {
   }
 
   const editProductList = (id) => {
-    setProductlists(
-      productlists.map((productlist) =>
-        productlist.id === id ? { ...productlist, isEditing: !productlist.isEditing } : productlist
-      )
+    const docRef = doc(db, 'productlists', id)
+
+    productlists.map((productlist) =>
+      productlist.id === id ? (productlist.isEditing === true ? updateDoc(docRef, { isEditing: false }) : updateDoc(docRef, { isEditing: true })) 
+      : updateDoc(docRef, { id: id})
     )
   }
 
   const editList = (task, id) => {
-    setProductlists(
-      productlists.map((productlist) =>
-      productlist.id === id ? { ...productlist, task, isEditing: !productlist.isEditing } : productlist
-      )
-    );
-  };
+    const docRef = doc(db, 'productlists', id)
+
+    productlists.map((productlist) =>
+    productlist.id === id ? updateDoc(docRef, { task: task, isEditing: false}) : updateDoc(docRef, { task: task })
+    )
+  }
 
   return (
     <div className="productlistwrapper">
