@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState} from "react"
 import axios from "axios"
 import "../styles/quiz.css"
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore"
+import { auth } from "../firebase"
+import { onAuthStateChanged } from 'firebase/auth'
 
 const Quiz = () => {
     const [age, setAge] = useState('')
@@ -8,22 +11,21 @@ const Quiz = () => {
     const [skinConditions, setSkinConditions] = useState('')
     const [skinConcerns, setSkinConcerns] = useState('')
     const [currQuestion, setCurrQuestion] = useState(1) 
-    const [recommendedProducts, setRecommendedProducts] = useState('')
+  
+    //making sure user is logged on before attempting to store to firestore( will take this out at the end )
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log('User is signed in:', user.uid)
+        } else {
+          console.log('User is signed out')
+        }
+      });
 
-    useEffect(() => {
-        console.log('recommendedProducts:', recommendedProducts)
-      }, [recommendedProducts])
-
-    const handleNext = () => {
-        setCurrQuestion((onPrev) => onPrev + 1)
-    }
+    const handleNext = () => {setCurrQuestion((onPrev) => onPrev + 1)}
     
-    const handlePrev = () => {
-        setCurrQuestion((onNext) => onNext - 1)
-    }
+    const handlePrev = () => { setCurrQuestion((onNext) => onNext - 1)}
 
-    const handleStart = () => {
-    }
+    const handleStart = () => {}
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -31,9 +33,11 @@ const Quiz = () => {
 
         if (age > 25) {
             userPreferences = [...userPreferences, "retinol", "anti-aging"]
-          }
+        }
     
         try {
+          console.log('User Preferences:', userPreferences)
+
           const responses = await Promise.all(
             userPreferences.map(async (concern) => {
               const keywords = [skinType, concern].filter(Boolean).join(' ')
@@ -50,18 +54,31 @@ const Quiz = () => {
                   'X-RapidAPI-Key': '508d2a55bdmshf292a5a473cc839p1cf4d7jsn3b570d81946b',
                   'X-RapidAPI-Host': 'sephora.p.rapidapi.com',
                 },
-              });
-    
-              return response.data
+              })
+
+              console.log('API Response:', response.data)
+              const productNames = response.data.data.map(product => product.attributes.name)
+              console.log('Product Names:', productNames)
+
+              return productNames
             })
           );
-          const allProducts = responses.reduce((acc, curr) => acc.concat(curr), [])
-          setRecommendedProducts(allProducts)
-        } catch (error) {
+            const Products = responses.reduce((acc, curr) => acc.concat(curr), []).slice(0, 10)
+            console.log('Recommended Product Names:', Products)
+
+        // Storing quiz results in Firestore
+            const quizResultsCollection = collection(getFirestore(), "quizResults")
+            const userData = {
+                userId: auth.currentUser.uid, 
+                recommendedProducts: Products,
+            }
+            const quizResultDocument = doc(quizResultsCollection, auth.currentUser.uid);
+            await setDoc(quizResultDocument, userData)
+        } 
+        catch (error) {
           console.error(error)
         }
-      };    
-
+      }   
 
     return (
      <div className = "container">
@@ -74,7 +91,6 @@ const Quiz = () => {
                     <input  id="age" name="age" className="age" type="number" value={age} onChange={(e) => setAge(e.target.value)} />
                     </label>
                     <br/>
-                
                 <button className = "prev "onClick={handleStart}></button>
                 <button className = "next" onClick={handleNext}></button>
             </div>
