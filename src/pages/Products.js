@@ -3,7 +3,7 @@ import "../styles/productlist.css"
 
 export default function Products() {
     return (
-        <div className="product-container">
+        <div>
             <AllProductList />
         </div>
     )

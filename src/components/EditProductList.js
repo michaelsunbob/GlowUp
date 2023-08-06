@@ -7,7 +7,7 @@ export const EditProductList = ({ editProductList, task }) => {
         e.preventDefault()
         editProductList(value, task.id)
     }
-    
+
     return (
         <form onSubmit={handleSubmit} className="productlistform">
             <input type="text" value={value} onChange={(e) => setValue(e.target.value)} className="productlist-input" placeholder='Update list' />
