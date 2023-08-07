@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Link style={{ textDecoration: 'none', color:'white' }} to='/recommendations'>Recommendations</Link>
                 </li>
                 <li>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to='/account'>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to='/authuser'>
                         <div className='profile-icon-container'>
                             <img src='/profileIcon.png' alt='Profile Icon' className='profile-icon-img' />
                         </div>
