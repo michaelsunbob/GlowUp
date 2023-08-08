@@ -29,7 +29,8 @@ export default function Home() {
                         </h2>
                         <div className="home-title">Ready to continue your skincare journey?</div>
                     </div>
-                    )  : <p className="about-text">About GlowUp</p>}
+                    )  : <p className="about-text">About GlowUp</p>
+                }
 
                 {User ? (
                     <p>
@@ -45,7 +46,7 @@ export default function Home() {
                             and providing a simple way to establish a routine that truly works for you.
                         </p>
                         <div className="login-links">
-                            To get the most of GlowUp, you can <Link className="login-links" to="/account">sign up here.</Link>
+                            To get the most of GlowUp, you can <Link className="login-links" to="/register">sign up here.</Link>
                             <br/> 
                             Or <Link className="login-links" to="/account">log in</Link> 
                         </div>
@@ -53,6 +54,5 @@ export default function Home() {
                     )
                 }
             </div>
-        
-    );
+    )
 }

@@ -65,7 +65,7 @@ export const Register = (props) => {
                     <h1 style={{ textDecoration: 'none', color:'black' }}>Registration Successful</h1>
                     <br />
                     <p>
-                        <a href="/">Take the Quiz!</a>
+                        <a href="/quiz">Take the Quiz!</a>
                     </p>
                 </section>
             ) : (

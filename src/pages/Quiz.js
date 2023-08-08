@@ -12,7 +12,6 @@ const Quiz = () => {
     const [skinConcerns, setSkinConcerns] = useState('')
     const [currQuestion, setCurrQuestion] = useState(1)
 
-    //making sure user is logged on before attempting to store to firestore( will take this out at the end )
     onAuthStateChanged(auth, (user) => {
         if (user) {
             console.log('User is signed in:', user.uid)
@@ -66,13 +65,12 @@ const Quiz = () => {
             const Products = responses.reduce((acc, curr) => acc.concat(curr), []).slice(0, 10)
             console.log('Recommended Product Names:', Products)
 
-            // Storing quiz results in Firestore
             const quizResultsCollection = collection(getFirestore(), "quizResults")
             const userData = {
                 userId: auth.currentUser.uid,
                 recommendedProducts: Products,
             }
-            const quizResultDocument = doc(quizResultsCollection, auth.currentUser.uid);
+            const quizResultDocument = doc(quizResultsCollection, auth.currentUser.uid)
             await setDoc(quizResultDocument, userData)
         }
         catch (error) {
