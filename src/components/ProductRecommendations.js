@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { getFirestore, doc, getDoc } from 'firebase/firestore'
 import { auth } from '../firebase'
+import {
+  getFirestore, collection, query, 
+  where, onSnapshot
+} from 'firebase/firestore'
 
 
 const ProductRecommendations = () => {
   const [recommendedProducts, setRecommendedProducts] = useState([])
-  
+
+  /*
   const fetchProducts = async () => {
     const quizResults = doc(getFirestore(), 'quizResults', auth.currentUser.uid)
 
@@ -25,6 +29,26 @@ const ProductRecommendations = () => {
   useEffect(() => {
     fetchProducts()
   }, [])
+
+  */
+
+  const db = getFirestore()
+  const colRef = collection(db, 'quizResults')
+
+  useEffect(() => {
+    if (auth.currentUser != null) {
+      const q = query(colRef, where("userId", "==", auth.currentUser.uid))
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          setRecommendedProducts(doc.data().recommendedProducts)
+        })
+      })
+
+      return () => unsubscribe()
+    }
+  }, [])
+
 
   return (
     <div>
