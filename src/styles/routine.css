@@ -1,0 +1,19 @@
+.routinewrapper {
+    background: #6B2E32;
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+.morning {
+    cursor: pointer;
+}
+
+.night {
+    margin-top: 5rem;
+    cursor: pointer;
+}
+
+p {
+    color: #F2E4DA;
+    text-align: left;
+}

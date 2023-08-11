@@ -1,3 +1,10 @@
+import { Routine } from "../components/Routine"
+import "../styles/routine.css"
+
 export default function Routines() {
-    return <h1>Routines</h1>
+    return (
+        <div>
+            <Routine />
+        </div>
+    )
 }
