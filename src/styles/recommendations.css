@@ -1,0 +1,39 @@
+.product-container{
+    margin-top: 120px; 
+    position: relative;
+  }
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none; 
+    margin-top: -150px;
+}
+  
+.item {
+    width: 180px;
+    margin: 10px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+  
+.image {
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+}
+  
+.name {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+}
+ 
+.title{
+    position: fixed;
+    top:  100px; 
+    left: 50%;
+    transform: translateX(-50%); 
+}

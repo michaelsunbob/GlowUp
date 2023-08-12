@@ -4,33 +4,11 @@ import {
   getFirestore, collection, query, 
   where, onSnapshot
 } from 'firebase/firestore'
+import '../styles/recommendations.css'
 
 
 const ProductRecommendations = () => {
   const [recommendedProducts, setRecommendedProducts] = useState([])
-
-  /*
-  const fetchProducts = async () => {
-    const quizResults = doc(getFirestore(), 'quizResults', auth.currentUser.uid)
-
-    try {
-      const docSnapshot = await getDoc(quizResults)
-      if (docSnapshot.exists()) {
-        const data = docSnapshot.data()
-        if (data.recommendedProducts) {
-          setRecommendedProducts(data.recommendedProducts)
-        }
-      }
-    }   catch (error) {
-      console.error('Error fetching the products:', error)
-    }
-  }
-
-  useEffect(() => {
-    fetchProducts()
-  }, [])
-
-  */
 
   const db = getFirestore()
   const colRef = collection(db, 'quizResults')
@@ -51,11 +29,16 @@ const ProductRecommendations = () => {
 
 
   return (
-    <div>
-      <h2>Recommended Products</h2>
-      <ul>
-        {recommendedProducts.map((product) => (
-          <li key={product}>{product}</li>
+    <div className="product-container">
+      <h1 className="title">Recommended Products</h1>
+      <ul className="list">
+      {recommendedProducts.map((product, index) => (
+          <li key={index} className="item" >
+            <div>
+              <img  className="image" src={product.image} alt={product.name} />
+              <h4 className="name">{product.name}</h4>
+            </div>
+          </li>
         ))}
       </ul>
     </div>

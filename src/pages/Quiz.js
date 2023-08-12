@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import axios from "axios"
 import "../styles/quiz.css"
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, deleteDoc } from "firebase/firestore"
 import { auth } from "../firebase"
 import { onAuthStateChanged } from 'firebase/auth'
+import  {useNavigate } from "react-router-dom"
 
 const Quiz = () => {
     const [age, setAge] = useState('')
@@ -19,15 +20,23 @@ const Quiz = () => {
             console.log('User is signed out')
         }
     })
-
+    const navigate = useNavigate()
     const handleNext = () => { setCurrQuestion((onPrev) => onPrev + 1) }
 
     const handlePrev = () => { setCurrQuestion((onNext) => onNext - 1) }
 
     const handleStart = () => { }
 
+    const deletePrevResults = async (userId) => {
+        const db = getFirestore()
+        const quizResultDoc = doc(collection(db, "quizResults"), userId)
+        await deleteDoc(quizResultDoc)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault()
+  
+        await deletePrevResults(auth.currentUser.uid)
         let userPreferences = [...skinConditions, ...skinConcerns]
 
         if (age > 25) {
@@ -55,10 +64,12 @@ const Quiz = () => {
                         },
                     })
 
-                    console.log('API Response:', response.data)
-                    const productNames = response.data.data.map(product => product.attributes.name)
-                    console.log('Product Names:', productNames)
+                    const productNames = response.data.data.map(product => ({
+                        name: product.attributes.name,
+                        image: product.attributes["image-urls"][0]
+                    }))
 
+                    console.log('Product Names:', productNames)
                     return productNames
                 })
             );
@@ -72,6 +83,8 @@ const Quiz = () => {
             }
             const quizResultDocument = doc(quizResultsCollection, auth.currentUser.uid)
             await setDoc(quizResultDocument, userData)
+            navigate('/recommendations')
+            console.log("navigated")
         }
         catch (error) {
             console.error(error)

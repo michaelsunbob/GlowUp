@@ -2,18 +2,14 @@
     box-sizing: border-box;
   }
 
-.options {
-    background-color: white;
-}
-
 .container {
    background-image: url("../assets/image3.jpg");
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   height: 63vh;
-   width: 110vh;
+   height: 73vh;
+   width: 120vh;
    background-size: cover;
    background-repeat: no-repeat;
    background-position: center;
@@ -22,9 +18,10 @@
 }
 
 .question {
-    color: white;
-    margin-bottom: 90px;
-    background-color: rgba(0, 0, 0, .6);
+    color: rgb(59, 39, 39);
+    margin-top: 90px;
+    margin-bottom: 100px;
+    background-color:rgba(255, 255, 255, 0.55); 
     padding: 20px;
     border-radius: 7px;
   }
@@ -63,7 +60,6 @@
     border: white, 5px;
     cursor: pointer;
     font-family:'Courier New', Courier, monospace;
-
 }
 
 .title{
@@ -91,15 +87,42 @@ input[type="number"]{
     display: flex;
     flex-wrap: wrap; 
     justify-content: center; 
-    max-width: 500px; 
+    max-width: 600px; 
+    margin-top: 20px;
     background-color: transparent;
 }
 .options label {
-    flex-basis: 45%; 
+    flex-basis: 40%; /* Adjust this value based on your design */ 
     margin-bottom: 40px; 
     margin-left:10px;
+    margin-right: 40px;
     font-weight: bold;
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background-color:rgba(255, 255, 255, 0.55);    
   }
+  .options input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.options label:hover {
+    background-color: #f0f0f0;
+}
+
+.options input[type="radio"]:checked + label {
+    background-color: #4f2427;
+    color: white;
+}
 
 .checkbox-container{
     display: flex;
