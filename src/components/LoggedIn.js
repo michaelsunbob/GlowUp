@@ -3,10 +3,27 @@ import React, { useState, useEffect } from "react"
 import  { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { storage } from "../firebase"
 import { Avatar } from '@mui/material';
-
+import "../styles/LoggedIn.css"
+import "../assets/Avatar.png"
+import { onAuthStateChanged, updateCurrentUser } from "@firebase/auth";
+import { auth } from "../firebase"
+import {upload} from "../firebase"
 
 
 export const LoggedIn = () => {
+    function useAuth() {
+        const [currentUser, setCurrentUser] = useState();
+        useEffect(()=> {
+            const u = onAuthStateChanged(auth, user => setCurrentUser(user));
+            return u
+        }, [])
+        return currentUser
+    }
+    const currentUser = useAuth();
+    const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png");
+    const [photo, setPhoto] =useState(null);
+    const [loading, setLoading] = useState(false);
+
     const [quizR, setQuizR] = useState([]);
     const db = getFirestore()
     const colRef = collection(db, "quizResults")
@@ -21,19 +38,22 @@ export const LoggedIn = () => {
 
     };
 
-    const handleSubmit = () => {
-        const img = ref(storage, "image")
-        uploadBytes(img, image).then(() => {
-            getDownloadURL(img).then((url)=> {
-                setURL(url);
-            }).catch(error => {
-                console.log(error.message, "error getting image")
-            });
-            setImage(null);
-        }).catch((error => {
-            console.log(error.message)
-        }));
-    };
+    function handleChange(e) {
+        if(e.target.files[0]){
+            setPhoto(e.target.files[0])
+        }
+    }
+
+    function handleClick() {
+        upload(photo, currentUser,setLoading );
+    }
+
+    useEffect(() => {
+        if(currentUser && currentUser.photoURL){
+            setPhotoURL(currentUser.photoURL)
+        }
+        
+    }, [currentUser])
 
     
 
@@ -45,27 +65,11 @@ export const LoggedIn = () => {
     }).catch(err =>{
         console.log(err.message)
     })
-
-    useEffect(()=> {
-        const quizRe = async () => {
-            const data = await getDocs(colRef)
-            setQuizR(data.docs.map((doc, i) => ({...doc.data(), id: doc.id})))
-        }; 
-        quizRe();
-    }, [colRef])
     return(
         <div>
-            <Avatar style = {{left: 80}}
-                alt = "Remy Sharp"
-                src = {url}
-                sx = {{width: 150, height: 150}}
-            />
-            <br>
-            </br>
-            <input style = {{left:80}}type = "file" onChange = {handleImageChange}/> 
-            <br>
-            </br>
-            <button onClick = {handleSubmit}>Submit</button>
+            <img src = {photoURL}alt = "Avatar" className = "Avatar"/>
+            <input type = "file" onChange = {handleChange}/>
+            <button disabled = {loading || !photo} onClick = {handleClick}>Submit</button>
         </div>
     );
 

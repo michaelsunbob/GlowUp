@@ -3,7 +3,7 @@
   }
 
 .container {
-   background-image: url("../assets/quizimage2.jpg");
+   background-image: url("../assets/quizImage2.jpg");
    display: flex;
    flex-direction: column;
    justify-content: center;
