@@ -35,14 +35,14 @@ const Recommendations = () => {
         ) : (
           <div>
             <h2>Product Recommendations</h2>
-            <p>To discover products tailored for your skin type and concerns, <Link to ="/quiz">take our quiz!</Link></p>
+            <p className= "text"> To discover products tailored for your skin type and concerns, <Link style={{color: "#000"}} to ="/quiz">take our quiz!</Link></p>
             
           </div>
         )
       ) : (
         <div>
           <h2>Product Recommendations</h2>
-          <p>To view products tailored for you, <Link to="/register">sign up</Link> and take our quiz!</p>
+          <p className="text">To view products tailored for you, <Link style={{color: "#000"}} to="/register">sign up</Link> and take our quiz!</p>
         </div>
       )}
     </div>

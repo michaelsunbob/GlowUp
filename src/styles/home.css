@@ -11,8 +11,9 @@
     background-position: center;
     border-radius: 2%;
     margin-top: 11vh; 
-    position: relative; 
+    position: relative;   
 }
+
 .welcome-text {
     font-family:'Courier New', Courier;
     color: black;
@@ -24,7 +25,6 @@
 }
 
 .home-title{
-    font-family:'Courier New', Courier;
     font-size: 30px;
     font-weight: bold;
     display:block;
@@ -34,13 +34,15 @@
     border-radius: 15px;
     padding: 10px;
 }
+.text{
+    color: #6B2E32;
+}
 
 .about-text{
-    font-family:'Courier New', Courier;
     font-size: 30px;
     font-weight: bold;
     display:block;
-    color: black;
+    color: #6B2E32;
     position: absolute;
     top: 40px; 
     padding: 20px 40px;   
@@ -50,11 +52,10 @@
     margin-top: 20px; 
     margin-left: 40px;
     margin-right: 40px;
-    padding: 20px; 
-    background-color: rgba(255, 255, 255, 0.55);
+    padding: 30px; 
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-    font-family: 'Courier New', Courier;
     font-weight:bolder;
     font-size: 17px;
     line-height: 2; 
@@ -62,8 +63,9 @@
 }
 
 .login-links{
-    font-family: 'Courier New', Courier, monospace;
     margin-top: 40px;
     font-weight:bolder;
     line-height: 2; 
+    font-style: italic;
+    color: #6B2E32;
 }

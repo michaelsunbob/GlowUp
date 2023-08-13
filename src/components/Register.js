@@ -76,7 +76,7 @@ export const Register = (props) => {
                     <h1>Register</h1>
                     <label>Email: </label>
                     <input type = 'email' id = "username" ref = {userRef} value = {username} onChange = {(e) => setUsername(e.target.value)} required></input>
-                    <p id = "userError" className={usernameFocus && username && !validUsername ? "instructions" : "offscreen"}>
+                    <p  id = "userError" className={usernameFocus && username && !validUsername ? "instructions" : "offscreen"}>
                         Must be 3 to 16 charcters long, begin with a letter and letters, numbers, underscores are to be used. End with @emailprovider
                     </p>
                     <br></br>

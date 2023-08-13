@@ -33,22 +33,25 @@ export default function Home() {
                 }
 
                 {User ? (
-                    <p>
-                        Check out your <Link to="/routines">routine page</Link>
+                    <p className="text">
+                        Check out your <Link style= {{color: "#6B2E32"}} to="/routines">routine page</Link>
                     </p>
                 ) : (
                     <div>
                         <p className="about-section">
                             Life can get really busy. However, an important part of our 
                             overall health is how we treat our skin. We all want to look and feel our best, and taking 
-                            good care of our skin is important for more than just appearance. Our app is designed to 
+                            good care of our skin is important for more than just appearance.
+                            <br />
+                            <br />
+                            Our app is designed to 
                             make skincare easy by offering personalized recommendations, tracking your skincare products, 
                             and providing a simple way to establish a routine that truly works for you.
                         </p>
                         <div className="login-links">
-                            To get the most of GlowUp, you can <Link className="login-links" to="/register">sign up here.</Link>
+                            To get the most of GlowUp, you can <Link style={{color: "#6B2E32"}} className="login-links" to="/register">sign up here</Link>
                             <br/> 
-                            Or <Link className="login-links" to="/account">log in</Link> 
+                            Or <Link style={{color: "#6B2E32"}} className="login-links" to="/account">log in</Link> 
                         </div>
                     </div>
                     )

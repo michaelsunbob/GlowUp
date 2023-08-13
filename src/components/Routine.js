@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { RoutineForm } from "./RoutineForm"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid"
 import { auth } from "../firebase"
 import {
@@ -76,6 +78,7 @@ export const Routine = () => {
         <div className="routinewrapper">
             <div className="morning" onClick={() => toggle("morning")}>
                 <h1>Morning Routine</h1>
+                <FontAwesomeIcon icon={faSun} className="icon" />
             </div>
             <RoutineForm addTask={addMorningTask} />
             {clicked === "morning" ? (
@@ -89,6 +92,7 @@ export const Routine = () => {
             ) : null}
             <div className="night" onClick={() => toggle("night")}>
                 <h1>Night Routine</h1>
+                <FontAwesomeIcon icon={faMoon} className="icon" />
             </div>
             <RoutineForm addTask={addNightTask} />
             {clicked === "night" ? (

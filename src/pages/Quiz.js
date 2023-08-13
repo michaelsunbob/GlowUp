@@ -21,11 +21,17 @@ const Quiz = () => {
         }
     })
     const navigate = useNavigate()
+
     const handleNext = () => { setCurrQuestion((onPrev) => onPrev + 1) }
 
     const handlePrev = () => { setCurrQuestion((onNext) => onNext - 1) }
 
     const handleStart = () => { }
+
+    const handleChoice = (event) => {
+        setSkinType(event.target.value)
+        handleNext()
+    }
 
     const deletePrevResults = async (userId) => {
         const db = getFirestore()
@@ -113,19 +119,19 @@ const Quiz = () => {
 
                         <div className="options">
                             <label htmlFor="oily">
-                                <input id="oily" type="radio" name='skinType' value='oily' checked={skinType === 'oily'} onChange={() => setSkinType('oily')} />
+                                <input id="oily" type="radio" name='skinType' value='oily' checked={skinType === 'oily'} onChange={handleChoice} />
                                 Oily
                             </label>
                             <label htmlFor="dry">
-                                <input id="dry" type="radio" name="skinType" value="dry" checked={skinType === 'dry'} onChange={() => setSkinType('dry')} />
+                                <input id="dry" type="radio" name="skinType" value="dry" checked={skinType === 'dry'} onChange={handleChoice} />
                                 Dry
                             </label>
                             <label htmlFor="combo">
-                                <input id="combo" type="radio" name="skinType" value="combination" checked={skinType === 'combination'} onChange={() => setSkinType('combination')} />
+                                <input id="combo" type="radio" name="skinType" value="combination" checked={skinType === 'combination'} onChange={handleChoice} />
                                 Combination
                             </label>
                             <label htmlFor="normal">
-                                <input id="normal" type="radio" name="skinType" value="normal" checked={skinType === 'normal'} onChange={() => setSkinType('normal')} />
+                                <input id="normal" type="radio" name="skinType" value="normal" checked={skinType === 'normal'} onChange={handleChoice} />
                                 Normal
                             </label>
                         </div>
@@ -171,8 +177,9 @@ const Quiz = () => {
                                 Rosacea
                             </label>
                         </div>
+                        <br />
                         <button className="prev" onClick={handlePrev}></button>
-                        <button className="next" onClick={handleNext}></button>
+                        <button className="next2" onClick={handleNext}></button>
                     </div>
                 )}
 
@@ -221,7 +228,7 @@ const Quiz = () => {
                         <br />
 
                         <button className="prev" onClick={handlePrev}></button>
-                        <button type="submit"> Submit </button>
+                        <button className="submit-btn" type="submit"> Submit </button>
                     </div>
                 )}
             </form>

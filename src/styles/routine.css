@@ -13,7 +13,20 @@
     cursor: pointer;
 }
 
+.morning,
+.night {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 p {
     color: #F2E4DA;
     text-align: left;
+}
+
+.icon{
+    margin-left: 1.5em;
+    font-size: 30px;
+    color: #F2E4DA;
 }

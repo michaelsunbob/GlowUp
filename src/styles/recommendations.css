@@ -4,6 +4,7 @@
   }
 
 .list {
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -36,4 +37,5 @@
     top:  100px; 
     left: 50%;
     transform: translateX(-50%); 
+    color: black;
 }

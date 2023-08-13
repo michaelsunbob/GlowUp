@@ -40,7 +40,7 @@ export const AllProductList = () => {
   const addProductList = (productlist) => {
     if (auth.currentUser != null) {
       addDoc(colRef, {
-        id: uuidv4(), task: productlist, view: false, isEditing: false, userId: auth.currentUser.uid
+        id: uuidv4(), task: productlist, view: true, isEditing: false, userId: auth.currentUser.uid
       })
     }
   }
