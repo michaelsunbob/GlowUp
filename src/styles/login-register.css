@@ -19,6 +19,7 @@ body{
     background: #D9C8C9;
     color: #a1797c;
     padding: 30px 40px;
+    position: relative;
 }
 
 .wrapper h1{
@@ -72,4 +73,14 @@ body{
     color: #88898B ;
     text-decoration: none;
     font-weight: 600;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+    color:black;
+}
+
+.instructions {
+    color:black;
 }

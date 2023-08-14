@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import {signInWithEmailAndPassword} from "firebase/auth"
 import "../styles/navbar.css"
-import "../styles/login.css"
+import "../styles/login-register.css"
 import { auth } from "../firebase";
 import { BiSolidUser, BiSolidLockAlt } from "react-icons/bi";
 
@@ -49,7 +49,7 @@ export const Login = () => {
                     <body>
                         <section>
                             <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-                            <div class = "wrapper">
+                            <div className = "wrapper">
                                 <form onSubmit={handleSubmit}>
                                     <h1 style={{color:"#6B2E32"}}>Login</h1>
                                     <div className = "input-box">

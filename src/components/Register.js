@@ -3,7 +3,7 @@ import {createUserWithEmailAndPassword} from "firebase/auth"
 import { auth } from "../firebase";
 import { Link } from 'react-router-dom'
 import "../styles/navbar.css"
-import "../styles/register.css"
+import "../styles/login-register.css"
 
 const userRegex = /^[A-z][A-z0-9-_]{2,15}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -69,40 +69,45 @@ export const Register = (props) => {
                     </p>
                 </section>
             ) : (
-                
+            <body>
                 <section>
-                <p ref={errorRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-                <form onSubmit = {handleSubmit}>
-                    <h1>Register</h1>
-                    <label>Email: </label>
-                    <input type = 'email' id = "username" ref = {userRef} value = {username} onChange = {(e) => setUsername(e.target.value)} required></input>
-                    <p  id = "userError" className={usernameFocus && username && !validUsername ? "instructions" : "offscreen"}>
-                        Must be 3 to 16 charcters long, begin with a letter and letters, numbers, underscores are to be used. End with @emailprovider
-                    </p>
-                    <br></br>
-                    <br></br>
-                    <label htmlFor = "password"> Password: </label>
-                    <input type = 'password' id = 'password' value = {password} onChange = {(e) => setPassword(e.target.value)} aria-invalid={validPassword ? "false" : "true"} 
-                       aria-describedby= "passwordError" onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} required></input>
-                    <p id = "userError" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
-                        Must be 8 to 24 characters. Must include at least 1 uppercase and 1 lowercase letter as well as  a number and a special
-                        character.
-                    </p>
-                    <br></br>
-                    <br></br>
-                    <label htmlFor = "password"> Verify Password: </label>
-                    <input type = 'password' id = 'confirmPassword' value = {verifyPass} onChange = {(e) => setVerifyPass(e.target.value)} aria-invalid={validVerify ? "false" : "true"} 
-                       aria-describedby= "passwordError" onFocus={() => setVerifyFocus(true)} onBlur={() => setVerifyFocus(false)} required></input>
-                    <p id = "userError" className={verifyFocus && !validVerify ? "instructions" : "offscreen"}>
-                        Must match password previously choosen.
-                    </p>
-                    <br></br>
-                    <br></br>
-                    <button type = "submit"disabled={ !validPassword || !validVerify ? true : false}>Register</button>
-                </form>
-                <br></br>
-                <Link style={{ textDecoration: 'none', color:'black' }} to='/account'>Login instead</Link>
-            </section>
+                    <p ref={errorRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">{errorMessage}</p>
+                    <div className = "wrapper">
+                        <form onSubmit = {handleSubmit}>
+                            <h1  style={{color:"#6B2E32"}}>Register</h1>
+                            <div className = "input-box">
+                                <label>Email: </label>
+                                <input type = 'email' id = "username" ref = {userRef} value = {username} onChange = {(e) => setUsername(e.target.value)} required></input>
+                                <p  id = "userError" className={usernameFocus && username && !validUsername ? "instructions" : "offscreen"}>
+                                    Must be 3 to 16 charcters long, begin with a letter and letters, numbers, underscores are to be used. End with @emailprovider
+                                </p>
+                            </div>
+                            <div className = "input-box">
+                                <label htmlFor = "password"> Password: </label>
+                                <input type = 'password' id = 'password' value = {password} onChange = {(e) => setPassword(e.target.value)} aria-invalid={validPassword ? "false" : "true"} 
+                                aria-describedby= "passwordError" onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} required></input>
+                                <p id = "userError" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
+                                    Must be 8-24 characters. Must include at least 1 uppercase and 1 lowercase letter as well as  a number and a special
+                                    character.
+                                </p>
+                            </div>
+                            <div className = "input-box">
+                                <label htmlFor = "password"> Verify Password: </label>
+                                <input type = 'password' id = 'confirmPassword' value = {verifyPass} onChange = {(e) => setVerifyPass(e.target.value)} aria-invalid={validVerify ? "false" : "true"} 
+                                aria-describedby= "passwordError" onFocus={() => setVerifyFocus(true)} onBlur={() => setVerifyFocus(false)} required></input>
+                                <p id = "userError" className={verifyFocus && !validVerify ? "instructions" : "offscreen"}>
+                                    Must match password previously choosen.
+                                </p>
+                            </div>
+                            <button className = "button" type = "submit"disabled={ !validPassword || !validVerify ? true : false}>Register</button>
+                        </form>
+                        <br></br>
+                        <Link style={{ color:'#a1797c' }} to='/account'>Login instead</Link>
+                    </div>
+                    
+                </section>
+            </body>  
+            
             )}
         </>
     )
