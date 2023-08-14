@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { RoutineForm } from "./RoutineForm"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
+import { faSun, faMoon, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { v4 as uuidv4 } from "uuid"
 import { auth } from "../firebase"
 import {
     getFirestore, collection,
-    addDoc, onSnapshot, query, where
+    addDoc, onSnapshot, query,
+    where, doc, deleteDoc
 } from "firebase/firestore"
 
 export const Routine = () => {
@@ -66,6 +67,16 @@ export const Routine = () => {
         }
     }
 
+    const deleteMorningTask = (id) => {
+        const docRef = doc(db, 'morningroutine', id)
+        deleteDoc(docRef)
+    }
+
+    const deleteNightTask = (id) => {
+        const docRef = doc(db, 'nightroutine', id)
+        deleteDoc(docRef)
+    }
+
     const toggle = (current) => {
         if (current === clicked) {
             return setClicked(null)
@@ -85,7 +96,12 @@ export const Routine = () => {
                 morningRoutine.map((task) => {
                     return (
                         <>
-                            <p>{task.task}</p>
+                            <div className="morning-item">
+                                <li>
+                                    {task.task}
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => deleteMorningTask(task.id)} className="trash" />
+                                </li>
+                            </div>
                         </>
                     )
                 })
@@ -99,7 +115,12 @@ export const Routine = () => {
                 nightRoutine.map((task) => {
                     return (
                         <>
-                            <p>{task.task}</p>
+                            <div className="night-item">
+                                <li>
+                                    {task.task}
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => deleteNightTask(task.id)} className="trash" />
+                                </li>
+                            </div>
                         </>
                     )
                 })

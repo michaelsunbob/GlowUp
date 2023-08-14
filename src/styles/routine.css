@@ -13,16 +13,22 @@
     cursor: pointer;
 }
 
+.morning-item,
+.night-item {
+    color: #F2E4DA;
+    text-align: left;
+}
+
+.trash {
+    cursor: pointer;
+    padding-left: 10px;
+}
+
 .morning,
 .night {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-p {
-    color: #F2E4DA;
-    text-align: left;
 }
 
 .icon{
