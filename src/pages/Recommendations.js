@@ -7,6 +7,7 @@ import { getFirestore, doc, getDoc } from "firebase/firestore"
 
 
 const Recommendations = () => {
+  /*
   const [User, setUser] = useState(null)
   const [TakenQuiz, setTakenQuiz] = useState(false)
 
@@ -25,25 +26,11 @@ const Recommendations = () => {
       listen()
     }
   }, [])
+  */
 
   return (
     <div>
-      {User ? (
-        TakenQuiz ? (
-          <ProductRecommendations />
-        ) : (
-          <div>
-            <h2>Product Recommendations</h2>
-            <p className= "text"> To discover products tailored for your skin type and concerns, <Link style={{color: "#000"}} to ="/quiz">take our quiz!</Link></p>
-            
-          </div>
-        )
-      ) : (
-        <div>
-          <h2>Product Recommendations</h2>
-          <p className="text">To view products tailored for you, <Link style={{color: "#000"}} to="/register">sign up</Link> and take our quiz!</p>
-        </div>
-      )}
+      <ProductRecommendations />
     </div>
   )
 }
