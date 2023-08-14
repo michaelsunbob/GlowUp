@@ -67,6 +67,7 @@ export const LoggedIn = () => {
     })
     return(
         <div>
+            <h1 style={{ color: '#6B2E32' }}>WELCOME!</h1>
             <img src = {photoURL}alt = "Avatar" className = "Avatar"/>
             <input type = "file" onChange = {handleChange}/>
             <button disabled = {loading || !photo} onClick = {handleClick}>Submit</button>
