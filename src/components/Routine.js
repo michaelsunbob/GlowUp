@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { RoutineForm } from "./RoutineForm"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
 import { v4 as uuidv4 } from "uuid"
 import { auth } from "../firebase"
 import {

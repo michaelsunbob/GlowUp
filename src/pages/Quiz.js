@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import "../styles/quiz.css"
-import { getFirestore, collection, doc, setDoc, deleteDoc } from "firebase/firestore"
+import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc } from "firebase/firestore"
 import { auth } from "../firebase"
 import { onAuthStateChanged } from 'firebase/auth'
 import  {useNavigate } from "react-router-dom"
@@ -12,6 +12,7 @@ const Quiz = () => {
     const [skinConditions, setSkinConditions] = useState('')
     const [skinConcerns, setSkinConcerns] = useState('')
     const [currQuestion, setCurrQuestion] = useState(1)
+    const [formSubmitted, setFormSubmitted] = useState(false)
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -20,6 +21,7 @@ const Quiz = () => {
             console.log('User is signed out')
         }
     })
+
     const navigate = useNavigate()
 
     const handleNext = () => { setCurrQuestion((onPrev) => onPrev + 1) }
@@ -28,19 +30,33 @@ const Quiz = () => {
 
     const handleStart = () => { }
 
+    const deletePrevResults = async (userId) => {
+        const db = getFirestore()
+        const quizResultDoc = doc(collection(db, "quizResults"), userId)
+    
+        const unsubscribe = onSnapshot(quizResultDoc, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+                deleteDoc(quizResultDoc)
+            }
+        })
+    
+        unsubscribe()
+    }
+
     const handleChoice = (event) => {
         setSkinType(event.target.value)
         handleNext()
     }
 
-    const deletePrevResults = async (userId) => {
-        const db = getFirestore()
-        const quizResultDoc = doc(collection(db, "quizResults"), userId)
-        await deleteDoc(quizResultDoc)
-    }
-
     const handleSubmit = async (event) => {
         event.preventDefault()
+        console.log('submitCalled')
+
+        if (formSubmitted) {
+            return
+        }
+    
+        setFormSubmitted(true)
   
         await deletePrevResults(auth.currentUser.uid)
         let userPreferences = [...skinConditions, ...skinConcerns]
@@ -74,13 +90,11 @@ const Quiz = () => {
                         name: product.attributes.name,
                         image: product.attributes["image-urls"][0]
                     }))
-
-                    console.log('Product Names:', productNames)
                     return productNames
                 })
             );
             const Products = responses.reduce((acc, curr) => acc.concat(curr), []).slice(0, 10)
-            console.log('Recommended Product Names:', Products)
+            console.log('Recommended Product Result:', Products)
 
             const quizResultsCollection = collection(getFirestore(), "quizResults")
             const userData = {
@@ -94,6 +108,9 @@ const Quiz = () => {
         }
         catch (error) {
             console.error(error)
+        }
+        finally {
+            setFormSubmitted(false)
         }
     }
 

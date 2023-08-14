@@ -23,7 +23,6 @@ const Recommendations = () => {
 
     return () => {
       listen()
-      console.log("rendered")
     }
   }, [])
 
