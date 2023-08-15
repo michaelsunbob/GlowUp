@@ -50,7 +50,8 @@ body.active-modal {
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
-    background: rgba(107, 46, 50, .1);
+    background: #E6E6FA;
+    padding: 14px 28px;
     border-radius: 3px;
     max-width: 800px;
     min-width: 400px;
