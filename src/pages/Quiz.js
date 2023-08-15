@@ -16,7 +16,7 @@ const Quiz = () => {
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            console.log('User is signed in:', user.uid)
+            console.log('User is signed in')
         } else {
             console.log('User is signed out')
         }
@@ -49,7 +49,6 @@ const Quiz = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log('submitCalled')
 
         if (formSubmitted) {
             return
@@ -102,7 +101,6 @@ const Quiz = () => {
             const quizResultDocument = doc(quizResultsCollection, auth.currentUser.uid)
             await setDoc(quizResultDocument, userData)
             navigate('/recommendations')
-            console.log("navigated")
         }
         catch (error) {
             console.error(error)

@@ -49,7 +49,7 @@ export default function Home() {
                             and providing a simple way to establish a routine that truly works for you.
                         </p>
                         <div className="login-links">
-                            To get the most of GlowUp, you can <Link style={{color: "#6B2E32"}} className="login-links" to="/register">sign up here</Link>
+                            To use GlowUp as part of your skincare journey, you can <Link style={{color: "#6B2E32"}} className="login-links" to="/register">sign up here</Link>
                             <br/> 
                             Or <Link style={{color: "#6B2E32"}} className="login-links" to="/account">log in</Link> 
                         </div>

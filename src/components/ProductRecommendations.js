@@ -53,6 +53,8 @@ const ProductRecommendations = () => {
                 </li>
               ))}
             </ul>
+            <br></br>
+            <p className='bottom-text'>If your skin goals change, you can always retake our <Link style = {{ color: "#000" }} to ="/quiz">quiz</Link></p>
           </div>
         ) : (
           <div>
