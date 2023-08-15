@@ -41,6 +41,17 @@ body.active-modal {
     position: fixed;
 }
 
+.modal, .overlay2 {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    margin-top:130px;
+}
+
 .overlay {
     background: rgba(107, 46, 50, .4);
 }

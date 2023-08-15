@@ -61,7 +61,7 @@ const AuthUser = () => {
                         <button onClick = {toggleModal} className="button">FAQ</button>
 
                         {modal && 
-                            <div className="modal">
+                            <div className="modal2">
                             <div onClick = {toggleModal}  className="overlay"></div>
                             <div className="modal-content">
                                 <br>
