@@ -4,6 +4,7 @@
     color: #a1797c; 
     padding: 30px 40px;
     position: relative;
+    margin-top:130px;
 }
 
 .wrapper .button{
@@ -48,8 +49,9 @@ body.active-modal {
     left: 0;
     right: 0;
     bottom: 0;
-    position: fixed;
-    margin-top:130px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    margin: 100px;
 }
 
 .overlay {
