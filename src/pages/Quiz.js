@@ -39,7 +39,6 @@ const Quiz = () => {
                 deleteDoc(quizResultDoc)
             }
         })
-    
         unsubscribe()
     }
 
@@ -55,7 +54,6 @@ const Quiz = () => {
         if (formSubmitted) {
             return
         }
-    
         setFormSubmitted(true)
   
         await deletePrevResults(auth.currentUser.uid)

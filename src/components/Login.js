@@ -42,7 +42,7 @@ export const Login = () => {
                     <h1>Login in Successful</h1>
                     <br />
                     <p>
-                        <a href="/authuser">Go to account</a>
+                        <a href="/authuser" style={{fontSize: "30px", color:"#6B2E32", fontWeight: "bold"}}>Go to account</a>
                     </p>
                 </section>
             ) : (
