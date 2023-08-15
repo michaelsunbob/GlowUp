@@ -1,4 +1,4 @@
-### Glow Up
+# Glow Up
 
 Our website is hosted on Netlify and uses Firestore and Firebase for data storage and authentication
 
