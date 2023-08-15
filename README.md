@@ -4,11 +4,11 @@ Our website is hosted on Netlify and uses Firestore and Firebase for data storag
 
 https://glowupgroup.netlify.app/
 
-# Getting Started with Create React App
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
